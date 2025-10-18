@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        input, button { padding: 5px; margin: 5px; }
+        .task-form { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Мой To-Do List</h1>
+    
+    <div class="task-form">
+        <form method="POST" action="/add">
+            <input type="text" name="title" placeholder="Название задачи" required>
+            <input type="text" name="description" placeholder="Описание задачи">
+            <button type="submit">Добавить задачу</button>
+        </form>
+    </div>
+
+    <div class="task-list">
+        <!-- Здесь позже будем показывать список задач -->
+    </div>
+</body>
+</html>
