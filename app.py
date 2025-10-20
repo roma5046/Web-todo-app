@@ -15,6 +15,12 @@ def add_task():
     tasks.append({'title':title, 'description': description}) # Добавление задачи в список
     return redirect(url_for('home')) # Перенаправление на главную страницу
 
+@app.route('/delete/<int:index>')  # маршрут для удаления задачи по индексу
+def delete_task(index):
+    if 0 <= index < len(tasks):  	# Проверка индекса
+        tasks.pop(index)  			# Удаление задачи из списка
+    return redirect(url_for('home'))  # Возврат на главную страницу
+
 # Запуск сервера, если файл запущен
 if __name__ == '__main__': # Запуск сервера, если файл запущен
     app.run(debug=True) # Запуск серверa в режиме отладки

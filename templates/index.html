@@ -21,7 +21,9 @@
    </div>
 	<div class="task-list"> <!-- Блок, где будет отображаться список задач -->
 		{% for task in tasks %}    <!-- Цикл: проходит по списку задач -->
-			<p><strong>{{ task.title }}</strong> — {{ task.description }}</p> <!-- Отображение названия и описания -->
+			<p><strong>{{ task.title }}</strong> — {{ task.description }} <!-- Отображение названия и описания -->
+			<a href="/delete/{{ loop.index0 }}">Удалить</a> <!-- Удаление задачи по индексу -->
+			</p>
 		{% endfor %}               <!-- Конец цикла -->
     </div>
 </body>
