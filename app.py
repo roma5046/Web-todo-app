@@ -12,13 +12,19 @@ def home():
 def add_task():
     title = request.form.get('title') # Получение названия задачи из формы
     description = request.form.get('description') # Получение описания задачи из формы
-    tasks.append({'title':title, 'description': description}) # Добавление задачи в список
+    tasks.append({'title': title, 'description': description, 'done': False}) # Добавление задачи в список, отметка выполнения
     return redirect(url_for('home')) # Перенаправление на главную страницу
 
 @app.route('/delete/<int:index>')  # маршрут для удаления задачи по индексу
 def delete_task(index):
     if 0 <= index < len(tasks):  	# Проверка индекса
         tasks.pop(index)  			# Удаление задачи из списка
+    return redirect(url_for('home'))  # Возврат на главную страницу
+
+@app.route('/toggle/<int:index>')  # Маршрут для изменения статуса выполнения задачи
+def toggle_task(index):
+    if 0 <= index < len(tasks):  # Проверка индекса
+        tasks[index]['done'] = not tasks[index]['done']  # Переключение статуса задачи
     return redirect(url_for('home'))  # Возврат на главную страницу
 
 # Запуск сервера, если файл запущен

@@ -14,14 +14,16 @@
     
     <div class="task-form">			<!-- Контейнер с формой добавления новой задачи -->
         <form method="POST" action="/add">	<!-- Форма, которая отправляет данные на маршрут /add методом POST -->
-            <input type="text" name="title" placeholder="Название задачи" required>	<!-- Поле для ввода названия задачи -->
+            <input type="text" name="title" placeholder="Название задачи" required autofocus>	<!-- Поле для ввода названия задачи + фокус на поле -->
             <input type="text" name="description" placeholder="Описание задачи">	<!-- Поле для ввода описания задачи -->
             <button type="submit">Добавить задачу</button>	<!-- Кнопка для добавления новой задачи -->
         </form>
    </div>
 	<div class="task-list"> <!-- Блок, где будет отображаться список задач -->
 		{% for task in tasks %}    <!-- Цикл: проходит по списку задач -->
-			<p><strong>{{ task.title }}</strong> — {{ task.description }} <!-- Отображение названия и описания -->
+			<p class="{% if task.done %}done{% endif %}">  <!-- Если задача выполнена, применяем стиль "done" -->
+			<strong>{{ task.title }}</strong> — {{ task.description }} <!-- Отображение названия и описания -->
+			<a href="/toggle/{{ loop.index0 }}">[✓]</a> <!-- Кнопка для переключения статуса выполнения -->
 			<a href="/delete/{{ loop.index0 }}">Удалить</a> <!-- Удаление задачи по индексу -->
 			</p>
 		{% endfor %}               <!-- Конец цикла -->
