@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8"> <!-- Кодировка -->
     <title>Вход</title> <!-- Заголовок -->
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; } /* Шрифт и отступы */
-        input, button { padding: 5px; margin: 5px; }           /* Отступы и внутренние поля */
-        .flash { color: red; margin-bottom: 10px; }           /* Стиль сообщений */
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Подключение CSS файла -->
 </head>
 <body>
-    <h1>Вход</h1> <!-- Заголовок страницы -->
+    <h1>Вход в систему</h1> <!-- Заголовок страницы -->
 
-    <!-- Вывод flash-сообщений -->
+    <!-- Блок для отображения flash-сообщений -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for msg in messages %}
@@ -21,12 +17,14 @@
       {% endif %}
     {% endwith %}
 
-    <!-- Форма логина -->
-    <form method="POST">
-        <input type="text" name="username" placeholder="Логин" required> <!-- Логин -->
-        <input type="password" name="password" placeholder="Пароль" required> <!-- Пароль -->
-        <button type="submit">Войти</button> <!-- Кнопка -->
-    </form>
+    <!-- Форма входа -->
+    <div class="auth-form"> <!-- Контейнер с формой входа -->
+    	<form method="POST"> <!-- Форма отправляется методом POST на тот же маршрут -->
+		<input type="text" name="username" placeholder="Логин" required> <!-- Поле для ввода логина -->
+		<input type="password" name="password" placeholder="Пароль" required> <!-- Поле для ввода пароля -->
+		<button type="submit">Войти</button> <!-- Кнопка -->
+	</form>
+    </div>
 
     <a href="{{ url_for('register') }}">Нет аккаунта? Зарегистрироваться</a> <!-- Ссылка на регистрацию -->
 </body>

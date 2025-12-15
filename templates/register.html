@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8"> <!-- Кодировка -->
     <title>Регистрация</title> <!-- Заголовок -->
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; } /* Шрифт и отступы */
-        input, button { padding: 5px; margin: 5px; }           /* Отступы и внутренние поля */
-        .flash { color: red; margin-bottom: 10px; }           /* Стиль сообщений */
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Подключение CSS файла -->    
 </head>
 <body>
     <h1>Регистрация</h1> <!-- Заголовок страницы -->
@@ -22,12 +18,13 @@
     {% endwith %}
 
     <!-- Форма регистрации -->
-    <form method="POST">
-        <input type="text" name="username" placeholder="Логин" required> <!-- Логин -->
-        <input type="password" name="password" placeholder="Пароль" required> <!-- Пароль -->
-        <button type="submit">Зарегистрироваться</button> <!-- Кнопка -->
+ <div class="auth-form"> <!-- Контейнер с формой регистрации -->
+    <form method="POST"> <!-- Отправка данных на тот же маршрут /register методом POST -->
+        <input type="text" name="username" placeholder="Логин" required> <!-- Поле для ввода логина -->
+        <input type="password" name="password" placeholder="Пароль" required> <!-- Поле для ввода пароля -->
+        <button type="submit">Зарегистрироваться</button> <!-- Кнопка для отправки формы -->
     </form>
-
+</div>
     <a href="{{ url_for('login') }}">Уже есть аккаунт? Войти</a> <!-- Ссылка на логин -->
 </body>
 </html>

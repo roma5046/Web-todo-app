@@ -3,14 +3,7 @@
 <head>
     <meta charset="UTF-8">	<!-- Кодировка для корректного отображения кириллицы -->
     <title>To-Do List</title> 	<!-- Заголовок страницы (во вкладке браузера) -->
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }	/* Общие стили для страницы: шрифт и отступы */
-        input, button { padding: 5px; margin: 5px; }		/* Отступы и внутренние поля для кнопок и полей ввода */
-        .task-form { margin-bottom: 20px; } 			/* Отступ снизу у формы, чтобы задачи не "прилипали" к ней */
-	.done { text-decoration: line-through; color: gray; }   /* Зачёркивание выполненной задачи, более бледный цвет */
-	.flash { color: green; margin-bottom: 10px; } 		/* Стиль для сообщений flash, зеленый цвет и отступ снизу */
-	.task-list p { margin-bottom: 10px; }                   /* Отступ между задачами, чтобы не слипались */
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Подключение CSS файла -->
 </head>
 <body>
     <h1>To-Do List</h1>	<!-- Основной заголовок страницы -->
@@ -33,12 +26,16 @@
    </div>
 	<div class="task-list"> <!-- Блок, где будет отображаться список задач -->
 		{% for task in tasks %}    <!-- Цикл: проходит по списку задач -->
-			<p class="{% if task.done %}done{% endif %}">  <!-- Если задача выполнена, применяем стиль "done" -->
-			<strong>{{ task.title }}</strong> — {{ task.description }} <!-- Отображение названия и описания -->
-			<a href="/toggle/{{ loop.index0 }}">[✓]</a> <!-- Кнопка для переключения статуса выполнения -->
-			<a href="/delete/{{ loop.index0 }}">Удалить</a> <!-- Удаление задачи по индексу -->
-			</p>
+			<div class="task-card">	<!-- Карточка одной задачи -->
+				<p class="{% if task.done %}done{% endif %}">  <!-- Если задача выполнена, применяем стиль "done" -->
+					<strong>{{ task.title }}</strong> — {{ task.description }} <!-- Отображение названия и описания -->
+				</p>
+				<div class="task-actions"> <!-- Ссылки для переключения статуса и удаления задачи -->
+					<a href="/toggle/{{ loop.index0 }}">[✓]</a> <!-- Кнопка для переключения статуса выполнения -->
+					<a href="/delete/{{ loop.index0 }}">Удалить</a> <!-- Удаление задачи по индексу -->
+				</div>
+			</div>
 		{% endfor %}               <!-- Конец цикла -->
-    </div>
+   </div>
 </body>
 </html>
