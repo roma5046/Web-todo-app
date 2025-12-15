@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru"> <!-- Язык страницы -->
+<head>
+    <meta charset="UTF-8"> <!-- Кодировка -->
+    <title>Вход</title> <!-- Заголовок -->
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; } /* Шрифт и отступы */
+        input, button { padding: 5px; margin: 5px; }           /* Отступы и внутренние поля */
+        .flash { color: red; margin-bottom: 10px; }           /* Стиль сообщений */
+    </style>
+</head>
+<body>
+    <h1>Вход</h1> <!-- Заголовок страницы -->
+
+    <!-- Вывод flash-сообщений -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="flash">{{ msg }}</div> <!-- Сообщение -->
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Форма логина -->
+    <form method="POST">
+        <input type="text" name="username" placeholder="Логин" required> <!-- Логин -->
+        <input type="password" name="password" placeholder="Пароль" required> <!-- Пароль -->
+        <button type="submit">Войти</button> <!-- Кнопка -->
+    </form>
+
+    <a href="{{ url_for('register') }}">Нет аккаунта? Зарегистрироваться</a> <!-- Ссылка на регистрацию -->
+</body>
+</html>

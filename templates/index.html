@@ -7,13 +7,23 @@
         body { font-family: Arial, sans-serif; margin: 40px; }	/* Общие стили для страницы: шрифт и отступы */
         input, button { padding: 5px; margin: 5px; }		/* Отступы и внутренние поля для кнопок и полей ввода */
         .task-form { margin-bottom: 20px; } 			/* Отступ снизу у формы, чтобы задачи не "прилипали" к ней */
-	.done { text-decoration: line-through; color: gray; }   /* Зачёркивание выполненной задачи, более бледный цвет */:
-
+	.done { text-decoration: line-through; color: gray; }   /* Зачёркивание выполненной задачи, более бледный цвет */
+	.flash { color: green; margin-bottom: 10px; } 		/* Стиль для сообщений flash, зеленый цвет и отступ снизу */
+	.task-list p { margin-bottom: 10px; }                   /* Отступ между задачами, чтобы не слипались */
     </style>
 </head>
 <body>
-    <h1>Мой To-Do List</h1>	<!-- Основной заголовок страницы -->
+    <h1>To-Do List</h1>	<!-- Основной заголовок страницы -->
     
+    <!-- Блок для отображения сообщений пользователю (flash) -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="flash">{{ msg }}</div>  <!-- Вывод каждого сообщения -->
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     <div class="task-form">			<!-- Контейнер с формой добавления новой задачи -->
         <form method="POST" action="/add">	<!-- Форма, которая отправляет данные на маршрут /add методом POST -->
             <input type="text" name="title" placeholder="Название задачи" required autofocus>	<!-- Поле для ввода названия задачи + фокус на поле -->
